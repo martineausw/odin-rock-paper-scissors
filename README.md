@@ -1,5 +1,90 @@
 # Odin Rock-Paper-Scissors
 
+## Revisiting
+
+At this point in the curriculum, TOP is revisiting rock-paper-scissors as an exercise with event listeners and manipulating the DOM.
+
+## Plan
+
+### Overview
+
+1. Remove the five round limit
+2. Add buttons for player options
+3. Output the running score of the game
+4. Output outcome of the round
+5. Stop the game when the player reaches five points
+
+### Sub-problems
+
+- Add a button for each of the player options: rock, paper, scissors
+  - Add a "click" listener to each button
+  - Add a handle function to the listeners that advances the game round on each choice
+  - Each button process the round with a given player choice
+- Add a text element that displays the running score of the game
+- Add a text element that displays the outcome of the round, following the player choice
+- End the game when the player score is five
+
+### Pseudocode
+
+let playerScore = 0
+let computerScore = 0
+
+```Pseudocode
+playRound(event)
+  let playerChoice = event.currentTarget.playerChoice
+  let computerChoice = event.currentTarget.computerChoice
+  if playerChoice == (computerChoice + 1) % 3
+    playerScore += 1
+    displayGameOutcome("You win the round!")
+  else if playerChoice == (computerChoice + 2) % 3
+    computerScore += 1
+    displayGameOutcome("You lose the round!")
+  evalGame()
+
+handleRock() 
+  let rock = document.querySelector("#rock")
+  rock.playerChoice = 0 
+  rock.computerChoice = getComputerChoice()
+  rock.addEventListener("click", playRound)
+
+handlePaper() 
+  let paper = document.querySelector("#paper")
+  paper.playerChoice = 1 
+  paper.computerChoice = getComputerChoice()
+  paper.addEventListener("click", playRound)
+
+handleScissors()
+  let scissors = document.querySelector("#scissors")
+  scissors.playerChoice = 2 
+  scissors.computerChoice = getComputerChoice()
+  scissors.addEventListener("click", playRound)
+
+displayPlayerScore(score) 
+  let playerScoreElement = document.querySelector("#playerScore") 
+  playerScoreElement.textContent = score 
+
+displayComputerScore()
+  let computerScoreElement = document.querySelector("#computerScore")
+  computerScoreElement.textContent = score
+
+getComputerChoice()
+  get random number then store in computerChoice
+  floor computerChoice
+  return computerChoice
+
+displayGameOutcome(string) 
+  let gameOutcomeElement = document.querySelector("#gameOutput)
+  gameOutputElement.textContent = string
+
+evalGame()
+  if playerScore == 5:
+    displayGameOutcome("You win the game!")
+  else if computerScore == 5:
+    displayGameOutcome("You lose the game!")
+
+```
+
+
 ## Description 
 
 This barebones project assigned by the The Odin Project curriculum exercises basic JavaScript problem-solving for the browser. It takes in text input from the user and checks it against a randomly selected computer choice in five rounds of rock-paper-scissors via console.
