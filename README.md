@@ -26,20 +26,23 @@ At this point in the curriculum, TOP is revisiting rock-paper-scissors as an exe
 
 ### Pseudocode
 
+```Pseudocode
 let playerScore = 0
 let computerScore = 0
+let isGameInProgress = true
 
-```Pseudocode
+handleRock()
+handlePaper()
+handleScissors()
+
 playRound(event)
-  let playerChoice = event.currentTarget.playerChoice
-  let computerChoice = event.currentTarget.computerChoice
-  if playerChoice == (computerChoice + 1) % 3
-    playerScore += 1
-    displayGameOutcome("You win the round!")
-  else if playerChoice == (computerChoice + 2) % 3
-    computerScore += 1
-    displayGameOutcome("You lose the round!")
-  evalGame()
+  if isGameInProgress
+    let playerChoice = event.currentTarget.playerChoice
+    let computerChoice = event.currentTarget.computerChoice
+    evalRound(playerChoice, computerChoice)
+  displayPlayerScore(playerScore)
+  displayComputerScore(computerScore)
+  isGameInProgress = evalGame(playerScore, computerScore)
 
 handleRock() 
   let rock = document.querySelector("#rock")
@@ -63,7 +66,7 @@ displayPlayerScore(score)
   let playerScoreElement = document.querySelector("#playerScore") 
   playerScoreElement.textContent = score 
 
-displayComputerScore()
+displayComputerScore(score)
   let computerScoreElement = document.querySelector("#computerScore")
   computerScoreElement.textContent = score
 
@@ -76,11 +79,24 @@ displayGameOutcome(string)
   let gameOutcomeElement = document.querySelector("#gameOutput)
   gameOutputElement.textContent = string
 
-evalGame()
+evalRound(playerChoice, computerChoice) 
+  if playerChoice == computerChoice % 3
+    displayGameOutcome("It's a tie!")
+  else if playerChoice == (computerChoice + 1) % 3
+    playerScore += 1
+    displayGameOutcome("You win the round!")
+  else if playerChoice == (computerChoice + 2) % 3
+    computerScore += 1
+    displayGameOutcome("You lose the round!")
+
+evalGame(playerScore, computerScore)
   if playerScore == 5:
     displayGameOutcome("You win the game!")
+    return false
   else if computerScore == 5:
     displayGameOutcome("You lose the game!")
+    return false
+  return true
 
 ```
 
